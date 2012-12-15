@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Alert keyword:</b>
+  <%= @alert_subscription.alert_keyword %>
+</p>
+
+<p>
+  <b>Frequency:</b>
+  <%= @alert_subscription.frequency %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @alert_subscription.user %>
+</p>
+
+
+<%= link_to 'Edit', edit_alert_subscription_path(@alert_subscription) %> |
+<%= link_to 'Back', alert_subscriptions_path %>

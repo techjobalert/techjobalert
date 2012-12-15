@@ -18,13 +18,13 @@ require 'spec_helper'
 # Message expectations are only used when there is no simpler way to specify
 # that an instance is receiving a specific message.
 
-describe PostsController do
+describe PostsController, focus: true do
 
   # This should return the minimal set of attributes required to create a valid
   # Post. As you add validations to Post, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    { "user" => "" }
+    { }
   end
 
   # This should return the minimal set of values that should be in the session
@@ -34,19 +34,28 @@ describe PostsController do
     {}
   end
 
-  describe "GET index" do
+  subject(:post_obj) { Post.new }
+  let(:invalid_user) { User.new }
+  let(:valid_user) { User.new }
+
+
+  before do
+    Post.stub(:all) { [post_obj] }
+    Post.stub(:find) { post_obj }
+    post_obj.stub(:id) { 1 }
+  end
+
+  describe "GET index", focus: true do
     it "assigns all posts as @posts" do
-      post = Post.create! valid_attributes
-      get :index, {}, valid_session
-      assigns(:posts).should eq([post])
+      get :index
+      assigns(:posts).should eq([post_obj])
     end
   end
 
   describe "GET show" do
     it "assigns the requested post as @post" do
-      post = Post.create! valid_attributes
-      get :show, {:id => post.to_param}, valid_session
-      assigns(:post).should eq(post)
+      get :show, {:id => post_obj.to_param}, valid_session
+      assigns(:post).should eq(post_obj)
     end
   end
 
@@ -59,9 +68,8 @@ describe PostsController do
 
   describe "GET edit" do
     it "assigns the requested post as @post" do
-      post = Post.create! valid_attributes
-      get :edit, {:id => post.to_param}, valid_session
-      assigns(:post).should eq(post)
+      get :edit, {:id => post_obj.to_param}, valid_session
+      assigns(:post).should eq(post_obj)
     end
   end
 
@@ -86,17 +94,19 @@ describe PostsController do
     end
 
     describe "with invalid params" do
+
+      
       it "assigns a newly created but unsaved post as @post" do
         # Trigger the behavior that occurs when invalid params are submitted
         Post.any_instance.stub(:save).and_return(false)
-        post :create, {:post => { "user" => "invalid value" }}, valid_session
+        post :create, {:post => { user: invalid_user }}, valid_session
         assigns(:post).should be_a_new(Post)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Post.any_instance.stub(:save).and_return(false)
-        post :create, {:post => { "user" => "invalid value" }}, valid_session
+        post :create, {:post => { user: valid_user }}, valid_session
         response.should render_template("new")
       end
     end
@@ -132,7 +142,7 @@ describe PostsController do
         post = Post.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Post.any_instance.stub(:save).and_return(false)
-        put :update, {:id => post.to_param, :post => { "user" => "invalid value" }}, valid_session
+        put :update, {:id => post.to_param, :post => { "user" => invalid_user }}, valid_session
         assigns(:post).should eq(post)
       end
 
@@ -140,15 +150,21 @@ describe PostsController do
         post = Post.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Post.any_instance.stub(:save).and_return(false)
-        put :update, {:id => post.to_param, :post => { "user" => "invalid value" }}, valid_session
+        put :update, {:id => post.to_param, :post => { "user" => invalid_user }}, valid_session
         response.should render_template("edit")
       end
     end
   end
 
   describe "DELETE destroy" do
+
+    before do
+      Post.unstub(:find)
+    end
+
     it "destroys the requested post" do
       post = Post.create! valid_attributes
+
       expect {
         delete :destroy, {:id => post.to_param}, valid_session
       }.to change(Post, :count).by(-1)

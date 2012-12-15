@@ -1,0 +1,29 @@
+<%= form_for(@alert_subscription) do |f| %>
+  <% if @alert_subscription.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@alert_subscription.errors.count, "error") %> prohibited this alert_subscription from being saved:</h2>
+
+      <ul>
+      <% @alert_subscription.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :alert_keyword %><br />
+    <%= f.text_field :alert_keyword %>
+  </div>
+  <div class="field">
+    <%= f.label :frequency %><br />
+    <%= f.text_field :frequency %>
+  </div>
+  <div class="field">
+    <%= f.label :user %><br />
+    <%= f.text_field :user %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

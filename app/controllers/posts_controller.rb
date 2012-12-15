@@ -80,4 +80,13 @@ class PostsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+
+    # Use this method to whitelist the permissible parameters. Example:
+    # params.require(:person).permit(:name, :age)
+    # Also, you can specialize this method with per-user checking of permissible attributes.
+    def post_params
+      params.require(:post).permit(:title, :description, :user)
+    end
 end
