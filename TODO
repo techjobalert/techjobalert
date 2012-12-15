@@ -1,0 +1,42 @@
+Code:
+
+User model
+JobPost model
+Alert model
+
+
+create a Chef script:
+----------------------
+install webmin
+install email server
+install PostgreSQL
+
+Testing:
+
+TestUnit
+minitest
+minitest/spec
+RSpec/Capybara
++Shoulda - validation tests
++Given
+Cucumber(?)
+
+= Infrastructure:
+
+== Deployment:
+
+=== Ruby:
+* MRI
+* JRuby
+
+=== Providers:
+
+* Heroku
+* Engine Yard
+* Amazon Beanstalk
+* Amazon EC2(+capistrano)
++ auto-scaling
+
+
+
+
