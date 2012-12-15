@@ -4,6 +4,44 @@ User model
 JobPost model
 Alert model
 
+Refactoring:
+
+1. Extract Value Objects:
+* JobPost/Location
+* AlertSubscription/Keyword
+
+2. Extract Service Objects:
+* AlertSendingService
+* SearchService
+* MatchingService (as part of Strategy Pattern)
+
+Introduce Postgres' advanced features:
+* PostGIS for Locations
+* Full text search for Keywords
+
+3. Extract Form Objects:
+* New Job Post Form => JobPost + Company + Location + CompanyContact
+
+4. Extract Query Objects:
+* Possibly when STI involved(?) (JobPost, TwitterJobPost, ResumePost etc.)
+
+5. Extract View Objects:
+* Charts & Graphs
+* Grids & Tables
+* SMS, Emails, json for (mobile) apps
+
+6. Extract Policy Objects:
+* use instead of CanCan's Ability class
+
+7. Extract Decorator Objects:
+* Logging
+* Upload
+* Social networks integration
+ 
+
+
+
+
 
 create a Chef script:
 ----------------------
@@ -37,6 +75,14 @@ Cucumber(?)
 * Amazon Beanstalk
 * Amazon EC2(+capistrano)
 + auto-scaling
+
+=== Data
+Postgresql:
+* GIS
+* Full text search
+* HStore
+* Job queue
+* Multitenancy
 
 
 
