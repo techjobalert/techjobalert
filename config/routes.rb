@@ -1,5 +1,8 @@
 Techjobalert::Application.routes.draw do
 
+  resources :posts
+
+
   resources :users
 
   resources :job_posts
