@@ -1,5 +1,14 @@
 Techjobalert::Application.routes.draw do
 
+  resources :alert_subscriptions
+
+
+  resources :alert_keywords
+
+
+  resources :posts
+
+
   resources :users
 
   resources :job_posts

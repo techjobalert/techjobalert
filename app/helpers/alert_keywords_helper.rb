@@ -1,0 +1,2 @@
+module AlertKeywordsHelper
+end

@@ -20,7 +20,15 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+group :test, :development do
+  gem 'rspec-rails'
+  gem 'pry'
+  gem 'pry-rails'
+  gem 'pry-debugger'
+end
+
 gem 'jquery-rails'
+gem 'strong_parameters'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

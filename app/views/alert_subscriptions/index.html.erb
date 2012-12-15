@@ -1,0 +1,27 @@
+<h1>Listing alert_subscriptions</h1>
+
+<table>
+  <tr>
+    <th>Alert keyword</th>
+    <th>Frequency</th>
+    <th>User</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @alert_subscriptions.each do |alert_subscription| %>
+  <tr>
+    <td><%= alert_subscription.alert_keyword %></td>
+    <td><%= alert_subscription.frequency %></td>
+    <td><%= alert_subscription.user %></td>
+    <td><%= link_to 'Show', alert_subscription %></td>
+    <td><%= link_to 'Edit', edit_alert_subscription_path(alert_subscription) %></td>
+    <td><%= link_to 'Destroy', alert_subscription, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Alert subscription', new_alert_subscription_path %>
